@@ -1,0 +1,24 @@
+{
+  "name": "amazon-ads-analytics-backend",
+  "version": "1.0.0",
+  "description": "Node + Express backend for the Amazon Ads Analytics dashboard: auth, report fetching, SQLite storage, JSON API, and the Gemini chat agent.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "fetch": "node src/jobs/fetchReports.js",
+    "auth": "node src/auth/getRefreshToken.js",
+    "profiles": "node src/auth/listProfiles.js"
+  },
+  "keywords": ["amazon-advertising", "sponsored-products", "analytics", "express", "sqlite"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@google/genai": "^2.12.0",
+    "axios": "^1.18.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "node-cron": "^4.6.0"
+  }
+}

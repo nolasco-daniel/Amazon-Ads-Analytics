@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# secrets — never commit real credentials
+.env
+backend/.env
+*.local
+
+# database file (contains your pulled data)
+*.sqlite
+*.sqlite3
+backend/data/
+
+# build output
+frontend/dist/
+
+# logs / OS junk
+*.log
+.DS_Store
+Thumbs.db

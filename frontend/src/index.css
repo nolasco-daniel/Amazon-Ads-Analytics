@@ -1,0 +1,183 @@
+/* ── Design tokens (from the validated data-viz reference palette) ──
+   Light values are the default; dark values swap under the OS setting
+   AND a manual [data-theme="dark"] toggle on <html>. */
+:root {
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --page:        #f9f9f7;   /* page plane */
+  --surface:     #fcfcfb;   /* cards / chart surface */
+  --text-1:      #0b0b0b;   /* primary ink */
+  --text-2:      #52514e;   /* secondary ink */
+  --muted:       #898781;   /* axis / labels */
+  --grid:        #e1e0d9;   /* hairline gridline */
+  --baseline:    #c3c2b7;   /* axis line */
+  --border:      rgba(11, 11, 11, 0.10);
+
+  --series-sales: #2a78d6;  /* categorical slot 1 (blue) */
+  --series-spend: #eb6834;  /* categorical slot 8 (orange) */
+
+  --good:     #0ca30c;
+  --warning:  #fab219;
+  --critical: #d03b3b;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --page:        #0d0d0d;
+    --surface:     #1a1a19;
+    --text-1:      #ffffff;
+    --text-2:      #c3c2b7;
+    --muted:       #898781;
+    --grid:        #2c2c2a;
+    --baseline:    #383835;
+    --border:      rgba(255, 255, 255, 0.10);
+
+    --series-sales: #3987e5;
+    --series-spend: #d95926;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --page:        #0d0d0d;
+  --surface:     #1a1a19;
+  --text-1:      #ffffff;
+  --text-2:      #c3c2b7;
+  --muted:       #898781;
+  --grid:        #2c2c2a;
+  --baseline:    #383835;
+  --border:      rgba(255, 255, 255, 0.10);
+
+  --series-sales: #3987e5;
+  --series-spend: #d95926;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background: var(--page);
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  margin-right: auto;
+}
+.header .sub { color: var(--text-2); font-size: 13px; font-weight: 400; }
+
+/* Controls */
+.controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.btn {
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-1);
+  cursor: pointer;
+}
+.btn:hover { border-color: var(--baseline); }
+.btn.active { background: var(--series-sales); border-color: var(--series-sales); color: #fff; }
+.btn.primary { background: var(--series-sales); border-color: var(--series-sales); color: #fff; }
+.btn:disabled { opacity: 0.5; cursor: default; }
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+}
+.card h2 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 14px;
+  color: var(--text-2);
+}
+
+/* KPI tiles */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.kpi {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.kpi .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
+.kpi .value {
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Table */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: right; padding: 9px 10px; border-bottom: 1px solid var(--grid); }
+th:first-child, td:first-child { text-align: left; }
+th { color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; }
+td { font-variant-numeric: tabular-nums; color: var(--text-1); }
+tbody tr:hover { background: color-mix(in srgb, var(--series-sales) 6%, transparent); }
+
+/* Status pill for ACoS (dot = icon, number = label → never color alone) */
+.pill { display: inline-flex; align-items: center; gap: 6px; justify-content: flex-end; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.dot.good { background: var(--good); }
+.dot.warning { background: var(--warning); }
+.dot.critical { background: var(--critical); }
+.dot.none { background: var(--muted); }
+
+/* States */
+.empty, .error {
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+.error { border-color: var(--critical); color: var(--critical); }
+.empty code {
+  background: color-mix(in srgb, var(--text-1) 8%, transparent);
+  padding: 2px 6px; border-radius: 4px; font-size: 12px;
+}
+
+/* Recharts tooltip */
+.tt {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+.tt .row { display: flex; align-items: center; gap: 6px; }
+.tt .swatch { width: 9px; height: 9px; border-radius: 2px; }
