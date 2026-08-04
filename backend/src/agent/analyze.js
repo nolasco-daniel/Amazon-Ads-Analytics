@@ -26,7 +26,7 @@ const sortRecs = (recs) =>
 
 // Target ACoS the agent optimizes toward, and the level it treats as critical.
 // These mirror the dashboard's acosStatus buckets.
-const ACOS_TARGET = 0.26;
+const ACOS_TARGET = 0.27;
 const ACOS_CRITICAL = 0.4;
 
 // --- tiny string formatters, so recommendations read like a human wrote them ---
