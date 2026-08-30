@@ -6,7 +6,7 @@
 // READ-ONLY — no tool changes anything in the database or on Amazon.
 
 import {
-  getKpis, getDailySeries, getCampaignBreakdown, getSearchTermsx,
+  getKpis, getDailySeries, getCampaignBreakdown, getSearchTerms,
 } from '../db.js';
 import { buildSummary } from '../agent/analyze.js';
 import { buildPeriodicSummaries } from '../agent/periods.js';
