@@ -6,7 +6,7 @@
 // NOT change anything, it only reads and explains.
 
 import { GoogleGenAI } from '@google/genai';
-import { config } from '../config.js';1
+import { config } from '../config.js';
 import { TOOL_DEFS, runTool } from './tools.js';
 
 // Built lazily on first use so the rest of the backend still boots when
