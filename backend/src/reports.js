@@ -3,7 +3,7 @@ import axios from 'axios';
 import { adsRequest } from './adsClient.js';
 
 // Columns available for the Sponsored Products "spCampaigns" report (v3).
-const SP_COLUMNS = [
+const SP_COLUMNS = [2
   'date',
   'campaignId',
   'campaignName',
